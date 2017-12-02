@@ -7,12 +7,12 @@ import (
 	"strconv"
 )
 
-func sum_consequtive(numbers []int) int {
+func sum_nth_consequtive(numbers []int, n int) int {
 	total := 0
 
 	for index := 0; index < len(numbers); index++ {
 		current := numbers[index]
-		next := numbers[(index + 1) % len(numbers)]
+		next := numbers[(index + n) % len(numbers)]
 
 		if current == next {
 			total += current
@@ -41,6 +41,6 @@ func main() {
 		numbers = append(numbers, num)
 	}
 
-	fmt.Println(sum_consequtive(numbers))
+	fmt.Println(sum_nth_consequtive(numbers, len(numbers) / 2))
 }
 
