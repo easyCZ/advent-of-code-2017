@@ -6,13 +6,13 @@ import (
 )
 
 func TestFindNextSquare(t *testing.T) {
-	scenarios := []struct{
+	scenarios := []struct {
 		addr int
-		out int
-	} {
-		{ 1, 1 },
-		{ 5, 3 },
-		{ 7, 3},
+		out  int
+	}{
+		{1, 1},
+		{5, 3},
+		{7, 3},
 		{25, 5},
 		{24, 5},
 		{17, 5},
@@ -36,5 +36,31 @@ func TestDistanceToAccessPort(t *testing.T) {
 
 	for _, scenario := range scenarios {
 		assert.Equal(t, scenario.out, ManhattanDistanceToAccessPort(scenario.address))
+	}
+}
+
+func TestSumAdjacent(t *testing.T) {
+	scenarios := []struct {
+		in  [][]int
+		out int
+	}{
+		{[][]int{
+			{1, 1, 1},
+			{1, 1, 1},
+			{1, 1, 1},
+		},
+			8,
+		},
+		{
+			[][]int{
+				{1, 2, 3},
+				{4, 5, 6},
+				{7, 8, 9},
+			}, 40,
+		},
+	}
+
+	for _, sc := range scenarios {
+		assert.Equal(t, sc.out, sumAdjacent(sc.in, 1, 1))
 	}
 }
