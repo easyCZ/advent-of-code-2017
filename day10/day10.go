@@ -7,6 +7,11 @@ import (
 	"strings"
 	"strconv"
 	"io"
+	"bytes"
+)
+
+var (
+	suffix = []int{17, 31, 73, 47, 23}
 )
 
 func Reverse(arr []int) []int {
@@ -17,9 +22,9 @@ func Reverse(arr []int) []int {
 	return reversed
 }
 
-func HashDigest(ring []int, size, position, skip int) ([]int, int, int) {
+func KnotHashCycle(ring []int, length, position, skip int) ([]int, int, int) {
 	from := position % len(ring)
-	to := (position + size) % len(ring)
+	to := (position + length) % len(ring)
 
 	var toReverse []int
 	if to < from {
@@ -33,10 +38,10 @@ func HashDigest(ring []int, size, position, skip int) ([]int, int, int) {
 		ring[(position+i)%len(ring)] = reversed[i%len(ring)]
 	}
 
-	return ring, position + size + skip, skip + 1
+	return ring, position + length + skip, skip + 1
 }
 
-func Hash(input []int) []int {
+func KnotHashRound(lengths []int) []int {
 	position := 0
 	skip := 0
 	ring := make([]int, 256)
@@ -44,23 +49,73 @@ func Hash(input []int) []int {
 		ring[i] = i
 	}
 
-	for _, in := range input {
-		ring, position, skip = HashDigest(ring, in, position, skip)
+	for _, length := range lengths {
+		ring, position, skip = KnotHashCycle(ring, length, position, skip)
 	}
 
 	return ring
 }
 
-func Parse(reader io.Reader) []string {
+func XorSegment(segment []int) int {
+	result := segment[0]
+	for i := 1; i < len(segment); i++ {
+		result = result ^ segment[i]
+	}
+	return result
+}
+
+func IntToHex(val, size int) string {
+	hex := fmt.Sprintf("%x", val)
+	if len(hex) < size {
+		for i := 0; i < size-len(hex); i++ {
+			hex = "0" + hex
+		}
+	}
+	return hex
+}
+
+func KnotHash(lengths []int) string {
+	withSuffix := append(lengths, suffix...)
+
+	ring := make([]int, 256)
+	for i := 0; i < 256; i++ {
+		ring[i] = i
+	}
+
+	position := 0
+	skip := 0
+	for i := 0; i < 64; i++ {
+		for _, length := range withSuffix {
+			ring, position, skip = KnotHashCycle(ring, length, position, skip)
+		}
+	}
+
+	var denseHash []int
+	for i := 16; i <= len(ring); i += 16 {
+		segment := ring[i-16: i]
+		xor := XorSegment(segment)
+		denseHash = append(denseHash, xor)
+	}
+
+	var buffer bytes.Buffer
+	for _, d := range denseHash {
+		buffer.WriteString(IntToHex(d, 2))
+	}
+	hex := buffer.String()
+	return hex
+}
+
+func ReadLine(reader io.Reader) string {
 	scanner := bufio.NewScanner(reader)
 	scanner.Split(bufio.ScanLines)
 	scanner.Scan()
-	return strings.Split(scanner.Text(), ",")
+	return scanner.Text()
 }
 
-func ParseInts(in []string) ([]int, error) {
+func ParseInts(line string) ([]int, error) {
+	tokens := strings.Split(line, ",")
 	var parsed []int
-	for _, token := range in {
+	for _, token := range tokens {
 		num, err := strconv.Atoi(token)
 		if err != nil {
 			return parsed, err
@@ -70,13 +125,26 @@ func ParseInts(in []string) ([]int, error) {
 	return parsed, nil
 }
 
+func ParseAcii(line string) []int {
+	var ascii []int
+	for _, b := range []byte(line) {
+		ascii = append(ascii, int(b))
+	}
+	return ascii
+}
+
 func main() {
-	input := Parse(os.Stdin)
-	inputAsInt, err := ParseInts(input)
+	line := ReadLine(os.Stdin)
+	inputAsInt, err := ParseInts(line)
 	if err != nil {
 		panic(err)
 	}
 
-	hashed := Hash(inputAsInt)
-	fmt.Println("First and second multiplied:", hashed[0]*hashed[1])
+	firstRound := KnotHashRound(inputAsInt)
+	fmt.Println("First and second multiplied:", firstRound[0]*firstRound[1])
+
+	ascii := ParseAcii(line)
+	hash := KnotHash(ascii)
+
+	fmt.Println("Hash:", hash)
 }
