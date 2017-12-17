@@ -16,6 +16,7 @@ var (
 		"nw": NewHexPoint(-1, 1, 0),
 		"se": NewHexPoint(1, -1, 0),
 		"sw": NewHexPoint(-1, 0, 1),
+		"ne": NewHexPoint(1, 0, -1),
 	}
 )
 
@@ -53,7 +54,7 @@ func NewOrigin() *HexPoint {
 func Move(step string, p *HexPoint) *HexPoint {
 	move, ok := directionalMoves[step]
 	if !ok {
-		panic(fmt.Sprintf("Failed to find %sin the delta moves", step))
+		panic(fmt.Sprintf("Failed to find %s in the delta moves", step))
 	}
 	return p.Add(move)
 }
@@ -68,10 +69,20 @@ func main() {
 	path := Parse(os.Stdin)
 	point := NewOrigin()
 
+	furthestDistance := float64(0)
+	var furthestPoint *HexPoint
+
 	for _, step := range path {
 		point = Move(step, point)
+		distance := point.DistanceFromOrigin()
+
+		if distance > furthestDistance {
+			furthestPoint = NewHexPoint(point.x, point.y, point.z)
+			furthestDistance = distance
+		}
 	}
 
 	fmt.Println("Went to ", point)
 	fmt.Println("Distance to origin:", point.DistanceFromOrigin())
+	fmt.Println("Steps when furthest", furthestPoint.DistanceFromOrigin())
 }
