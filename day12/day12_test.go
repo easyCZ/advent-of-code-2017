@@ -66,3 +66,17 @@ func TestFindConnectedGroup(t *testing.T) {
 	connectedGroup := FindConnectedGroupForHouseZero(housesById)
 	assert.Len(t, connectedGroup, 6)
 }
+
+func TestFindGroups(t *testing.T) {
+	housesById := map[int]*House{
+		0: {id: 0, connectsTo: []int{0, 2}},
+		1: {id: 1, connectsTo: []int{1}},
+		2: {id: 2, connectsTo: []int{0, 2, 3, 4}},
+		3: {id: 3, connectsTo: []int{2, 4, 3}},
+		4: {id: 4, connectsTo: []int{4, 2, 3, 6}},
+		5: {id: 5, connectsTo: []int{5, 6}},
+		6: {id: 6, connectsTo: []int{6, 4, 5}},
+	}
+	groups := FindGroups(housesById)
+	assert.Len(t, groups, 2)
+}

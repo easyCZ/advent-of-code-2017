@@ -100,6 +100,35 @@ func FindConnectedGroupForHouseZero(houses map[int]*House) []*House {
 	return FindConnectedGroup(0, houses, explored)
 }
 
+func FindGroups(houses map[int]*House) [][]*House {
+	available := make(map[int]bool)
+	for id, _ := range houses {
+		available[id] = true
+	}
+
+	var groups [][]*House
+	for id := range houses {
+		_, stillToSearch := available[id]
+		if stillToSearch {
+			explored := make(map[int]bool)
+			group := FindConnectedGroup(id, houses, explored)
+
+			// remove from search space
+			for _, member := range group {
+				delete(available, member.id)
+			}
+
+			groups = append(groups, group)
+
+			if len(available) == 0 {
+				return groups
+			}
+		}
+	}
+
+	return groups
+}
+
 func main() {
 	houses, err := Parse(os.Stdin)
 	if err != nil {
@@ -107,4 +136,7 @@ func main() {
 	}
 	connectedGroup := FindConnectedGroupForHouseZero(houses)
 	fmt.Println("Connected group of House 0:", len(connectedGroup))
+
+	groups := FindGroups(houses)
+	fmt.Println("Number of groups:", len(groups))
 }
