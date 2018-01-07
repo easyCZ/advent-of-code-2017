@@ -111,13 +111,10 @@ func (f *Firewall) Clone() *Firewall {
 	}
 }
 
-func TraverseFirewall(firewall *Firewall, delay int) (int) {
-	//fmt.Println("initial", firewall.String())
+func TraverseFirewall(firewall Firewall, delay int) (int) {
 	for i := 0; i < delay; i++ {
 		firewall.Move()
 	}
-	//fmt.Println("after delay", delay)
-	//fmt.Println(firewall.String())
 	severity := 0
 	for _, layer := range firewall.layers {
 
@@ -143,15 +140,12 @@ func ParseFromFile(filepath string) (*Firewall, error) {
 	return Parse(file)
 }
 
-func TraverseFirewallWithoutGettingCought(firewall *Firewall) int {
-	cloned := firewall.Clone()
+func TraverseFirewallWithoutGettingCought(firewall Firewall) int {
 	found := false
 	delay := 0
 	for !found {
-		in := cloned.Clone()
-		fmt.Println("Delay", delay)
-		fmt.Println(in)
-		severity := TraverseFirewall(in, delay)
+		severity := TraverseFirewall(firewall, delay)
+		fmt.Println("severity", severity)
 		if severity == 0 {
 			found = true
 			return delay

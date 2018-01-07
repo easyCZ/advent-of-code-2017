@@ -54,7 +54,7 @@ func TestTraverseFirewall(t *testing.T) {
 		},
 	}
 
-	severity := TraverseFirewall(firewall, 0)
+	severity := TraverseFirewall(*firewall, 0)
 	assert.Equal(t, 24, severity)
 }
 
@@ -71,7 +71,7 @@ func TestTraverseFirewallWithDelayOf10(t *testing.T) {
 		},
 	}
 
-	severity := TraverseFirewall(firewall, 10)
+	severity := TraverseFirewall(*firewall, 10)
 	assert.Equal(t, 0, severity)
 }
 
@@ -88,7 +88,7 @@ func TestTraverseFirewallWithoutGettingCought(t *testing.T) {
 		},
 	}
 
-	delay := TraverseFirewallWithoutGettingCought(firewall)
+	delay := TraverseFirewallWithoutGettingCought(*firewall)
 	assert.Equal(t, 10, delay)
 }
 

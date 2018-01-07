@@ -1,0 +1,102 @@
+Order after moves:  pkgnhomelfdibjac
+1 pkgnhomelfdibjac
+2 eoahnkljfipdcgbm
+3 cgijbakldmfneohp
+4 ipcgjnfblhkemado
+5 lamknphecfdbgioj
+6 mghpfknjadiolebc
+7 ibkcmadhfongeljp
+8 pdnibohglekjmfca
+9 jpbanilemgdochkf
+10 lgocdkajbpfnhmie
+11 ijdgpanbkcomeflh
+12 albdephcojkgmifn
+13 nkhicfmegpdoljab
+14 efacikgjpondbhlm
+15 bhojlakgdmpiefcn
+16 onbhjiplgckemadf
+17 gamkincebpdlhofj
+18 mhcnpkijadofgelb
+19 olkbmadcpfihegjn
+20 ndiolfchgekjmpba
+21 jnlaiogemhdfbckp
+22 ghfbdkajlnpicmoe
+23 ojdhnailkbfmepgc
+24 agldencbfjkhmopi
+25 ikcobpmehndfgjal
+26 epabokhjnfidlcgm
+27 lcfjgakhdmnoepbi
+28 filcjonghbkemadp
+29 hamkoibelndgcfpj
+30 mcbinkojadfphegl
+31 fgklmadbnpocehji
+32 idofgpbchekjmnla
+33 jigaofhemcdplbkn
+34 hcpldkajginobmfe
+35 fjdciaogklpmenhb
+36 ahgdeiblpjkcmfno
+37 okbflnmecidphjag
+38 enalfkcjipodgbhm
+39 gbpjhakcdmifenlo
+40 pogbjfihclkemadn
+41 camkfolegidhbpnj
+42 mbloikfjadpncehg
+43 phkgmadlinfbecjo
+44 odfphnlbcekjmiga
+45 johafpcembdnglki
+46 cbngdkajhoiflmpe
+47 pjdboafhkgnmeicl
+48 achdeolgnjkbmpif
+49 fklpgimebodncjah
+50 eiagpkbjonfdhlcm
+51 hlnjcakbdmopeigf
+52 nfhljpocbgkemadi
+53 bamkpfgehodclnij
+54 mlgfokpjadnibech
+55 nckhmadgoiplebjf
+56 fdpnciglbekjmoha
+57 jfcapnbemldihgko
+58 blihdkajcfopgmne
+59 njdlfapckhimeobg
+60 abcdefghijklmnop
+61 pkgnhomelfdibjac
+count - first 999999939
+Remaining 37
+Remaining iteration:  0
+Remaining iteration:  1
+Remaining iteration:  2
+Remaining iteration:  3
+Remaining iteration:  4
+Remaining iteration:  5
+Remaining iteration:  6
+Remaining iteration:  7
+Remaining iteration:  8
+Remaining iteration:  9
+Remaining iteration:  10
+Remaining iteration:  11
+Remaining iteration:  12
+Remaining iteration:  13
+Remaining iteration:  14
+Remaining iteration:  15
+Remaining iteration:  16
+Remaining iteration:  17
+Remaining iteration:  18
+Remaining iteration:  19
+Remaining iteration:  20
+Remaining iteration:  21
+Remaining iteration:  22
+Remaining iteration:  23
+Remaining iteration:  24
+Remaining iteration:  25
+Remaining iteration:  26
+Remaining iteration:  27
+Remaining iteration:  28
+Remaining iteration:  29
+Remaining iteration:  30
+Remaining iteration:  31
+Remaining iteration:  32
+Remaining iteration:  33
+Remaining iteration:  34
+Remaining iteration:  35
+Remaining iteration:  36
+Order after 1billion dances:  enalfkcjipodgbhm
